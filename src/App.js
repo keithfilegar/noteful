@@ -1,25 +1,29 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import STORE from './dummy-store';
+import Header from './header/header'
+import Sidebar from './sidebar/sidebar';
 import './App.css';
+import MainSection from './mainSection/mainSection';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  state= {
+    STORE,
+    selectedFolder: null
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <Header />
+        <div className="group">
+          <Sidebar folders={STORE.folders}/>
+          <MainSection store={STORE} selectedFolder={this.state.selectedFolder}/>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
