@@ -1,16 +1,32 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import STORE from './dummy-store';
 import Header from './header/header'
-import Sidebar from './sidebar/sidebar';
+import FolderList from './sidebar/folderList';
 import './App.css';
 import MainSection from './mainSection/mainSection';
 
 
 class App extends Component {
   state= {
-    STORE,
-    selectedFolder: null
+    STORE
+  }
+
+  renderFolders() {
+    return (
+      <>
+        <Route
+            exact
+            path='/'
+            render={routeProps => (
+              <FolderList 
+                folders={this.state.STORE.folders}
+                {...routeProps}
+              />
+            )}
+          />
+      </>
+    )
   }
 
   render() {
@@ -18,9 +34,11 @@ class App extends Component {
       <div className="App">
         <Header />
         <div className="group">
-          <Sidebar folders={STORE.folders}/>
-          <MainSection store={STORE} selectedFolder={this.state.selectedFolder}/>
-        </div>
+          <div className="sidebar-container item">
+              {this.renderFolders()}
+          </div>
+            <MainSection store={this.state.STORE}/>
+          </div>
       </div>
     );
   }

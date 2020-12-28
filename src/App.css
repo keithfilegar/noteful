@@ -49,3 +49,7 @@
 .item-double {
   flex: 2;
 }
+
+.sidebar-container {
+  border-right: 1px solid black;
+}
