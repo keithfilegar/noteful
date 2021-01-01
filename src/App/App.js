@@ -6,6 +6,7 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
 import NotePageMain from '../NotePageMain/NotePageMain';
+import AddFolder from '../AddFolder/AddFolder'
 import dummyStore from '../dummy-store';
 import {getNotesForFolder, findNote, findFolder} from '../notes-helpers';
 import './App.css';
@@ -22,6 +23,14 @@ class App extends Component {
         );
         this.setState({
             notes: newNotes
+        })
+    }
+
+    addFolder = folder => {
+        const newFolders = this.state.folders.push(folder)
+        console.log(newFolders)
+        this.setState({
+            folders: newFolders
         })
     }
 
@@ -87,6 +96,10 @@ class App extends Component {
                     path="/note/:noteId"
                     component={NotePageMain}
                 />
+                <Route 
+                    path="/add-folder"
+                    component={AddFolder}
+                />
             </>
         );
     }
@@ -96,6 +109,7 @@ class App extends Component {
             notes: this.state.notes,
             folders: this.state.folders,
             deleteNote: this.deleteNote,
+            addFolder: this.addFolder
         }
         return (
             <div className="App">
