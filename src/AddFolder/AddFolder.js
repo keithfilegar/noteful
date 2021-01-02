@@ -8,13 +8,12 @@ class AddFolder extends React.Component {
         id: '',
         name: '',
     }
-    
 
     static contextType = AppContext;
 
     updateName(name) {
         this.setState({
-            name: name,
+            name: name
         });
     }
 
@@ -37,7 +36,7 @@ class AddFolder extends React.Component {
         console.log(newFolder)
         fetch(`${API_ENDPOINT}/folders`, {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
+            headers: {'content-type': 'application/json'},
             body: JSON.stringify(newFolder)
         })
         .then(res => {
@@ -66,7 +65,7 @@ class AddFolder extends React.Component {
                                 <h2>Add a folder</h2>
                                 <label htmlFor="newFolderName">New Folder Name: </label>
                                 <input type="text" className="addFolderName"
-                                name="newFolderName" id="newFolderName" defaultValue="Folder name" onChange={e => this.updateName(e.target.value)}/>
+                                name="newFolderName" id="newFolderName" onChange={e => this.updateName(e.target.value)} required/>
                                 <button type="submit">Add Folder</button>
                             </form>
                         </div>
