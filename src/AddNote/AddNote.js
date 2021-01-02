@@ -28,23 +28,36 @@ export default class AddNote extends React.Component {
         })
     }
 
+    //TODO: validate against null value with propType
+    changeFolder(value) {
+        if(value === "none") {
+            this.setFolder(null)
+        } else {
+            this.setFolder(value)
+        }
+    }
+
     setContent(content) {
         this.setState({
             content: content
         })
     }
 
-    setModified() {
-        const timeStamp = new Date().toISOString()
+    setModified(timeStamp) {
         this.setState ({
             modified: timeStamp
         })
     }
 
+    onButtonClick = event => {
+        const timeStamp = new Date().toISOString();
+        this.setModified(timeStamp);
+    }
+
     handleSubmit = event => {
         event.preventDefault();
-        this.setModified();
         const API_ENDPOINT='http://localhost:9090'
+        
         const newNote = this.state
         console.log(newNote)
         fetch(`${API_ENDPOINT}/notes`, {
@@ -63,6 +76,7 @@ export default class AddNote extends React.Component {
         .catch((error) => {
             console.log(error)
         });
+        this.props.history.push('/')
     }
 
     render() {
@@ -85,7 +99,7 @@ export default class AddNote extends React.Component {
                         <select
                             id="folderName"
                             name="folderName"
-                            onChange={e => this.setFolder(e.target.value)}
+                            onChange={e => this.changeFolder(e.target.value)}
                             required>
                                 <option value="none">Select a Folder</option>
                                 {folderOptions}
@@ -94,7 +108,8 @@ export default class AddNote extends React.Component {
                         <label htmlFor="noteContent">Note Content:</label>
                         <br/>
                         <textarea id="noteContent" name="noteContent" onChange={e => this.setContent(e.target.value)}></textarea>
-                        <button type="submit">Add Note</button>                    </form>
+                        <button type="submit" onClick={e => this.onButtonClick(e)}>Add Note</button>
+                    </form>
                 </div>
                 )}
             </AppContext.Consumer>
