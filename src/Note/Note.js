@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -6,9 +7,7 @@ import AppContext from '../AppContext'
 import './Note.css'
 
 export default class Note extends React.Component {
-  static defaultProps ={
-    onDeleteNote: () => {},
-  }
+  
   static contextType = AppContext;
 
   handleClickDelete = e => {
@@ -30,7 +29,6 @@ export default class Note extends React.Component {
     })
     .then(data => {
       this.context.deleteNote(noteId)
-      this.props.onDeleteNote(noteId)
     })
     .catch(error => {
       console.log(error)
@@ -70,4 +68,10 @@ export default class Note extends React.Component {
       </AppContext.Consumer>
     )
   }
+}
+
+Note.propTypes = {
+  id: PropTypes.string.isRequired,
+  modified: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired
 }

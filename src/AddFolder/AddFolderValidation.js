@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function AddNoteValidation(props) {
+export default function AddFolderValidation(props) {
     if(props.message) {
       return (
         <div className="error">{props.message}</div>

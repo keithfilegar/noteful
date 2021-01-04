@@ -1,5 +1,6 @@
 import React from 'react'
 import AppContext from '../AppContext'
+import AddFolderValidation from './AddFolderValidation'
 import './AddFolder.css'
 
 class AddFolder extends React.Component {
@@ -23,8 +24,11 @@ class AddFolder extends React.Component {
         });
     }
 
-    navigateHome = () => {
-        this.props.history.push('/')
+    validateName() {
+        const name = this.state.name.trim();
+        if (name.length === 0) {
+            return true
+        }
     }
 
     handleSubmit = e => {
@@ -47,13 +51,13 @@ class AddFolder extends React.Component {
         })
         .then(res=> res.json())
         .then(data => {
-            console.log(data)
-            this.context.value.addFolder(data)
+            this.context.addFolder(data)
+            this.props.history.push('/')
         })
         .catch((error) => {
             console.log(error)
         });
-        this.navigateHome()
+        
     }
 
     render() {
@@ -63,10 +67,13 @@ class AddFolder extends React.Component {
                         <div className="AddFolderMain">
                             <form className="newFolderForm" onSubmit={e => this.handleSubmit(e)}>
                                 <h2>Add a folder</h2>
-                                <label htmlFor="newFolderName">New Folder Name: </label>
+                                <label htmlFor="newFolderName">New Folder Name: *</label>
                                 <input type="text" className="addFolderName"
                                 name="newFolderName" id="newFolderName" onChange={e => this.updateName(e.target.value)} required/>
-                                <button type="submit">Add Folder</button>
+                                <button 
+                                    type="submit"
+                                    disabled={this.validateName()}
+                                >Add Folder</button>
                             </form>
                         </div>
                 )}
