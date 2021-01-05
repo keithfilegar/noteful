@@ -9,11 +9,8 @@ export default class NotePageMain extends React.Component {
 
   render() {
     const { notes } = this.context
-    console.log(notes)
-    const noteId = this.props.match.params
-    console.log(noteId)
+    const noteId = this.props.match.params.noteId
     const note = findNote(notes, noteId) || {content: ''}
-    console.log(note)
     if(note === '') {
       throw Error;
     }
@@ -35,8 +32,4 @@ export default class NotePageMain extends React.Component {
   
 }
 
-NotePageMain.defaultProps = {
-  note: {
-    content: '',
-  }
-}
+
