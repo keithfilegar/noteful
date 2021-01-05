@@ -1,6 +1,5 @@
 import React from 'react'
 import AppContext from '../AppContext'
-import AddFolderValidation from './AddFolderValidation'
 import './AddFolder.css'
 
 class AddFolder extends React.Component {
@@ -38,7 +37,7 @@ class AddFolder extends React.Component {
         const API_ENDPOINT='http://localhost:9090'
         const newFolder = this.state
         console.log(newFolder)
-        fetch(`${API_ENDPOINT}/folders`, {
+        fetch(`${API_ENDPOINT}/foldeeeers`, {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(newFolder)
@@ -66,10 +65,11 @@ class AddFolder extends React.Component {
                 {(context) => (
                         <div className="AddFolderMain">
                             <form className="newFolderForm" onSubmit={e => this.handleSubmit(e)}>
-                                <h2>Add a folder</h2>
+                                <h2 className="addFolderHeader">Add a folder</h2>
                                 <label htmlFor="newFolderName">New Folder Name: *</label>
                                 <input type="text" className="addFolderName"
                                 name="newFolderName" id="newFolderName" onChange={e => this.updateName(e.target.value)} required/>
+                                <br/>
                                 <button 
                                     type="submit"
                                     disabled={this.validateName()}

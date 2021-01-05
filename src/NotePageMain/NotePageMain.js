@@ -3,6 +3,7 @@ import Note from '../Note/Note'
 import AppContext from '../AppContext'
 import { findNote } from '../notes-helpers'
 import './NotePageMain.css'
+import NoteError from '../NoteError'
 
 export default class NotePageMain extends React.Component {
   static contextType = AppContext;
@@ -11,21 +12,21 @@ export default class NotePageMain extends React.Component {
     const { notes } = this.context
     const noteId = this.props.match.params.noteId
     const note = findNote(notes, noteId) || {content: ''}
-    if(note === '') {
-      throw Error;
-    }
+
     return (
       <section className='NotePageMain'>
-        <Note
-          id={note.id}
-          name={note.name}
-          modified={note.modified}
-        />
-        <div className='NotePageMain__content'>
-          {note.content.split(/\n \r|\n/).map((para, i) =>
-            <p key={i}>{para}</p>
-          )}
-        </div>
+        <NoteError>
+          <Note
+            id={note.id}
+            name={note.name}
+            modified={note.modified}
+          />
+          <div className='NotePageMain__content'>
+            {note.content.split(/\n \r|\n/).map((para, i) =>
+              <p key={i}>{para}</p>
+            )}
+          </div>
+        </NoteError>
       </section>
     )
   }

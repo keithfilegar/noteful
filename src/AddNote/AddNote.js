@@ -125,7 +125,7 @@ export default class AddNote extends React.Component {
                 {(context) => (
                     <div className="addNoteContainer">
                     <form className="addNote" onSubmit={e => this.handleSubmit(e)}>
-                        <h2>Add Note</h2>
+                        <h2 className="addNoteTitle">Add Note</h2>
                         <label htmlFor="noteName">Name: </label>
                         <input type="text" className="addNoteName"
                         name="newNoteName" id="newNoteName" onChange={e => this.updateName(e.target.value)} required/>
@@ -146,6 +146,7 @@ export default class AddNote extends React.Component {
                         <label htmlFor="noteContent">Note Content:</label>
                         <br/>
                         <textarea id="noteContent" name="noteContent" onChange={e => this.setContent(e.target.value)}></textarea>
+                        <br/>
                         <button type="submit"
                             onClick={e => this.onButtonClick(e)}
                             disabled={

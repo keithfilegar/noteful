@@ -35,8 +35,11 @@ export default class Note extends React.Component {
     })
   }
 
+  
+
   render() {
     const { name, id, modified} = this.props
+    
     return (
       <AppContext.Consumer>
         {(context) => (
@@ -71,7 +74,13 @@ export default class Note extends React.Component {
 }
 
 Note.propTypes = {
-  id: PropTypes.string.isRequired,
-  modified: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired
+  id: PropTypes.string,
+  modified: PropTypes.string,
+  name: PropTypes.string
+}
+
+Note.defaultProps = {
+  id: "",
+  modified: "",
+  name: ""
 }
