@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import AppContext from '../AppContext'
 import AddNoteValidation from './AddNoteValidation'
 import './AddNote.css'
@@ -163,4 +164,8 @@ export default class AddNote extends React.Component {
             
         )
     }
+}
+
+AddNote.propTypes = {
+    history: PropTypes.node.isRequired
 }

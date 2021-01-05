@@ -12,6 +12,15 @@ export default class NotePageMain extends React.Component {
     const { notes } = this.context
     const noteId = this.props.match.params.noteId
     const note = findNote(notes, noteId) || {content: ''}
+    console.log(note)
+    console.log(notes)
+
+    const noteDeleted = notes.includes(note)
+    console.log(noteDeleted)
+
+    // if(noteDeleted === true) {
+    //   this.props.history.push('/')
+    // }
 
     return (
       <section className='NotePageMain'>
@@ -20,6 +29,8 @@ export default class NotePageMain extends React.Component {
             id={note.id}
             name={note.name}
             modified={note.modified}
+            history={this.props.history}
+            detailView={true}
           />
           <div className='NotePageMain__content'>
             {note.content.split(/\n \r|\n/).map((para, i) =>

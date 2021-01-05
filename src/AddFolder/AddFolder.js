@@ -1,8 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import AppContext from '../AppContext'
 import './AddFolder.css'
 
-class AddFolder extends React.Component {
+export default class AddFolder extends React.Component {
     
     state = {
         id: '',
@@ -37,7 +38,7 @@ class AddFolder extends React.Component {
         const API_ENDPOINT='http://localhost:9090'
         const newFolder = this.state
         console.log(newFolder)
-        fetch(`${API_ENDPOINT}/foldeeeers`, {
+        fetch(`${API_ENDPOINT}/folders`, {
             method: 'POST',
             headers: {'content-type': 'application/json'},
             body: JSON.stringify(newFolder)
@@ -82,4 +83,6 @@ class AddFolder extends React.Component {
     }
 }
 
-export default AddFolder;
+AddFolder.propTypes = {
+    history: PropTypes.node.isRequired
+}
