@@ -17,11 +17,8 @@ export default class NoteListMain extends React.Component {
 
   render() {
     const { folderId } = this.props.match.params
-    console.log(folderId)
     const { notes=[] } = this.context
-    console.log(notes)
     const notesForFolder = getNotesForFolder(notes, folderId)
-    console.log(notesForFolder)
     return (
       <section className='NoteListMain'>
         <ul>
